@@ -1,5 +1,6 @@
 package com.ios.backend.controllers;
 
+import com.graphqlify.annotation.GraphQLType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +83,7 @@ public class TaskController {
   @PostMapping("/updateTaskStatus/{status}")
   @CrossOrigin(origins = clientUrl)
   @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+  @GraphQLType(type = Void.class)
   public ResponseEntity<?> updateTaskStatus(@PathVariable("status") String status) {
     return new ResponseEntity<>(HttpStatus.OK);
   }
@@ -110,6 +112,7 @@ public class TaskController {
   @PostMapping("/addTaskWork/{pid}/{uid}/{tid}")
   @CrossOrigin(origins = clientUrl)
   @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+  @GraphQLType(type = Void.class)
   public ResponseEntity<?> addWork(@PathVariable("pid") Long pid, @PathVariable("uid") Long uid, @PathVariable("tid") Long tid, @RequestBody WorkDTO work) {
     // service call
     service.addWork(uid, pid, tid, work.getWork());

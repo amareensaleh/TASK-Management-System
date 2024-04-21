@@ -1,5 +1,6 @@
 package com.ios.backend.controllers;
 
+import com.graphqlify.annotation.GraphQLType;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,6 +60,7 @@ public class AuthController {
 
 	@PostMapping("/signin")
 	@CrossOrigin(origins = clientUrl)
+	@GraphQLType(type = Void.class)
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
@@ -75,6 +77,7 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	@CrossOrigin(origins = clientUrl)
+	@GraphQLType(type = Void.class)
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {

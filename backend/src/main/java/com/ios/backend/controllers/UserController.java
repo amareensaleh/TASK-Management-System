@@ -1,5 +1,6 @@
 package com.ios.backend.controllers;
 
+import com.graphqlify.annotation.GraphQLType;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,7 @@ public class UserController {
   
   @GetMapping("/getAllUser/{pid}")
   @CrossOrigin(origins = clientUrl)
+  @GraphQLType(name = "getAllUserByProgram")
   @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
   public ResponseEntity<UserListResource> getAllUser(@PathVariable("pid") Long pid) {
     UserListResource ulr = new UserListResource();
