@@ -16,7 +16,7 @@ public class NewTaskDTO {
     return user;
   }
 
-  public void setTrainee(long[] user) {
+  public void setUser(long[] user) {
     this.user = user;
   }
 }

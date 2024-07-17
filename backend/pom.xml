@@ -15,13 +15,13 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.petra.graphqlify</groupId>
-			<artifactId>graphqlify-java-processor-engine</artifactId>
+			<artifactId>graphqlify-java-processor</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
