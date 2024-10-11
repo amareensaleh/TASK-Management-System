@@ -1,0 +1,200 @@
+type CalendarListResource {
+  events: [CalendarResource]
+}
+
+type CalendarResource {
+  title: String
+  start: LocalDateTime
+  end: LocalDateTime
+}
+
+input CodeDTOInput {
+  code: String
+  uid: Long
+}
+
+scalar Double
+
+scalar JSON
+
+scalar LocalDateTime
+
+input LoginFormInput {
+  username: String
+  password: String
+}
+
+scalar Long
+
+type Mutation {
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:110:3]"
+  addWork(pid: Long, uid: Long, tid: Long, work: WorkDTOInput @payload): JSON
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/AuthController.java:60:9]"
+  authenticateUser(loginRequest: LoginFormInput @payload): JSON
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/ProgramController.java:31:3]"
+  createProgram(uid: Long, newProgramDto: NewProgramDTOInput @payload): Boolean
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:36:3]"
+  createTask(newTaskDto: NewTaskDTOInput @payload): Boolean
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/ProgramController.java:63:3]"
+  enterProgram(code: CodeDTOInput @payload): Boolean
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/AuthController.java:76:9]"
+  registerUser(signUpRequest: SignUpFormInput @payload): JSON
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:82:3]"
+  updateTaskStatus(status: String): JSON
+}
+
+input NewProgramDTOInput {
+  id: Long
+  name: String
+  description: String
+  users: [Long]
+  admin: Long
+}
+
+input NewTaskDTOInput {
+  task: TaskDTOInput
+  user: [Long]
+}
+
+type ProgramListResource {
+  programList: [ProgramResource]
+}
+
+type ProgramResource {
+  id: Long
+  name: String
+  description: String
+  admin: Long
+}
+
+type Query {
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/ProgramController.java:39:3]"
+  getAllProgram: ProgramListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/ProgramController.java:46:3]"
+  getAllProgramByAdmin(id: Long): ProgramListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/ProgramController.java:54:3]"
+  getAllProgramByUser(uid: Long): ProgramListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:73:3]"
+  getAllTaskByProgram(pid: Long): TaskListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:55:3]"
+  getAllTaskByUser(pid: Long, uid: Long): TaskListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:64:3]"
+  getAllTaskRecord: TaskRecordListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:46:3]"
+  getAllTaskRecordByUser(pid: Long, uid: Long): TaskRecordListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/UserController.java:26:3]"
+  getAllUser: UserListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/UserController.java:35:3]"
+  getAllUserUsingPid(pid: Long): UserListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:89:3]"
+  getTaskCalendar(pid: Long, uid: Long): CalendarListResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/UserController.java:44:3]"
+  getUserById(uid: Long): UserResource
+  "[/Users/amarees/IdeaProjects/TASK-Management-System/backend/src/main/java/com/ios/backend/controllers/TaskController.java:119:3]"
+  getWork(pid: Long, uid: Long, tid: Long): WorkDTO
+}
+
+input SignUpFormInput {
+  name: String
+  username: String
+  email: String
+  user: String
+  password: String
+}
+
+type Task {
+  id: Long
+  program: Long
+  name: String
+  createdBy: Long
+  createdTime: LocalDateTime
+  startTime: LocalDateTime
+  deadline: LocalDateTime
+  modifiedBy: Long
+  modifiedTime: LocalDateTime
+  status: String
+  description: String
+}
+
+input TaskDTOInput {
+  id: Long
+  program: Long
+  name: String
+  createdBy: Long
+  createdTime: LocalDateTime
+  startTime: LocalDateTime
+  deadline: LocalDateTime
+  modifiedBy: Long
+  modifiedTime: LocalDateTime
+  status: String
+  description: String
+}
+
+type TaskListResource {
+  taskList: [Task]
+}
+
+type TaskRecord {
+  id: Long
+  user: Long
+  program: Long
+  task: Long
+  status: String
+  score: Double
+  max: Double
+  remarks: String
+  work: String
+}
+
+type TaskRecordListResource {
+  taskRecordList: [TaskRecord]
+}
+
+type UserListResource {
+  userList: [UserResource]
+}
+
+type UserResource {
+  id: Long
+  name: String
+  username: String
+  email: String
+}
+
+type WorkDTO {
+  work: String
+}
+
+input WorkDTOInput {
+  work: String
+}
+
+"Directs the executor to include this field or fragment only when the `if` argument is true"
+directive @include(
+    "Included when true."
+    if: Boolean!
+  ) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"Directs the executor to skip this field or fragment when the `if` argument is true."
+directive @skip(
+    "Skipped when true."
+    if: Boolean!
+  ) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+directive @payload on ARGUMENT_DEFINITION
+
+"Marks the field, argument, input field or enum value as deprecated"
+directive @deprecated(
+    "The reason for the deprecation"
+    reason: String = "No longer supported"
+  ) on FIELD_DEFINITION | ARGUMENT_DEFINITION | ENUM_VALUE | INPUT_FIELD_DEFINITION
+
+"Exposes a URL that specifies the behaviour of this scalar."
+directive @specifiedBy(
+    "The URL that specifies the behaviour of this scalar."
+    url: String!
+  ) on SCALAR
+
+"Indicates an Input Object is a OneOf Input Object."
+directive @oneOf on INPUT_OBJECT
+
