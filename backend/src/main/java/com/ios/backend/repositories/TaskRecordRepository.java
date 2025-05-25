@@ -12,10 +12,10 @@ import com.ios.backend.entities.TaskRecord;
 @Repository
 public interface TaskRecordRepository extends JpaRepository<TaskRecord, Long> {
 
-  @Query("SELECT t FROM TaskRecord t WHERE t.user=:id")
-  List<TaskRecord> getTaskRecordByUser(@Param("id") long user);
+  @Query("SELECT t FROM TaskRecord t WHERE t.uid=:id")
+  List<TaskRecord> getTaskRecordByUser(@Param("id") long uid);
   
-  List<TaskRecord> findByProgramAndUser(long program, long user);
+  List<TaskRecord> findByPidAndUid(long program, long uid);
   
-  TaskRecord findByProgramAndUserAndTask(long program, long user, long task);
+  TaskRecord findByPidAndUidAndTask(long program, long user, long task);
 }

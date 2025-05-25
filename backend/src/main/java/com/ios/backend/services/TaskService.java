@@ -22,7 +22,7 @@ public class TaskService {
 
   public void createTask(Task task, long[] trainees) {
     Task savedTask = taskRepository.save(task);
-    long program = savedTask.getProgram();
+    long program = savedTask.getPid();
     this.initTaskRecords(trainees,savedTask.getId(), program);
   }
 
@@ -30,9 +30,9 @@ public class TaskService {
     // to be shifted to util
     for (long id : trainees) {
       TaskRecord taskRecord = new TaskRecord();
-      taskRecord.setUser(id);
+      taskRecord.setUid(id);
       taskRecord.setTask(taskId);
-      taskRecord.setProgram(program);
+      taskRecord.setPid(program);
       taskRecord.setWork("NO WORK DONE YET !!");
       taskRecordRepository.save(taskRecord);
     }
@@ -61,7 +61,7 @@ public class TaskService {
   }
 
   public TaskListResource getAllTaskByProgram(long pid) {
-    List<Task> taskList = (List<Task>)taskRepository.findByProgram(pid);
+    List<Task> taskList = (List<Task>)taskRepository.findByPid(pid);
     TaskListResource tlr = new TaskListResource();
     tlr.setTaskList(taskList);
     return tlr;
@@ -69,20 +69,20 @@ public class TaskService {
 
   public TaskRecordListResource getAllTaskRecordOfUserAndProgram(long uid, long pid) {
     TaskRecordListResource trlr = new TaskRecordListResource();
-    List<TaskRecord> trl = taskRecordRepository.findByProgramAndUser(pid, uid);
+    List<TaskRecord> trl = taskRecordRepository.findByPidAndUid(pid, uid);
     trlr.setTaskRecordList(trl);
     return trlr;
   }
   
   public TaskListResource getAllTaskOfUserAndProgram(long uid, long pid) {
     TaskListResource tlr = new TaskListResource();
-    List<Task> tl = this.getTasksFromTaskRecord(taskRecordRepository.findByProgramAndUser(pid, uid));
+    List<Task> tl = this.getTasksFromTaskRecord(taskRecordRepository.findByPidAndUid(pid, uid));
     tlr.setTaskList(tl);
     return tlr;
   }
 
   public WorkDTO getWork(long uid, long pid, long tid) {
-    TaskRecord tr = taskRecordRepository.findByProgramAndUserAndTask(pid, uid, tid);
+    TaskRecord tr = taskRecordRepository.findByPidAndUidAndTask(pid, uid, tid);
     WorkDTO dto = new WorkDTO();
     dto.setWork(tr.getWork() != null ? tr.getWork() : "");
     
@@ -90,7 +90,7 @@ public class TaskService {
   }
 
   public void addWork(long uid, long pid, long tid, String work) {
-    TaskRecord tr = taskRecordRepository.findByProgramAndUserAndTask(pid, uid, tid);
+    TaskRecord tr = taskRecordRepository.findByPidAndUidAndTask(pid, uid, tid);
     tr.setWork(work);
     taskRecordRepository.save(tr);
   }

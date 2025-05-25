@@ -17,8 +17,8 @@ public class TaskRecord {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
-  private long user;
-  private long program;
+  private long uid;
+  private long pid;
   private long task;
   private String status;
   private double score;
@@ -28,12 +28,12 @@ public class TaskRecord {
   @Column(length = 65450, columnDefinition = "text")
   private String work;
 
-  public long getProgram() {
-    return program;
+  public long getPid() {
+    return pid;
   }
 
-  public void setProgram(long program) {
-    this.program = program;
+  public void setPid(long program) {
+    this.pid = program;
   }
 
   public long getId() {
@@ -44,12 +44,12 @@ public class TaskRecord {
     this.id = id;
   }
 
-  public long getUser() {
-    return user;
+  public long getUid() {
+    return uid;
   }
 
-  public void setUser(long user) {
-    this.user = user;
+  public void setUid(long user) {
+    this.uid = user;
   }
 
   public long getTask() {

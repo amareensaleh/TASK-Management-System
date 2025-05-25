@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
-@ServletComponentScan("graphql.resolvers")
+@ServletComponentScan("graphqlify.generated.graphql")
 @SpringBootApplication
 @PropertySource("classpath:application.properties")
 public class BackendApplication {

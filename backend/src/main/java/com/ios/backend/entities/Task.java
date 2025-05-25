@@ -20,7 +20,7 @@ public class Task {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
-  private long program;
+  private long pid;
   private String name;
   private long createdBy;
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
@@ -45,8 +45,8 @@ public class Task {
     return id;
   }
 
-  public long getProgram() {
-    return program;
+  public long getPid() {
+    return pid;
   }
 
   public String getName() {
@@ -89,8 +89,8 @@ public class Task {
     this.id = id;
   }
 
-  public void setProgram(long program) {
-    this.program = program;
+  public void setPid(long program) {
+    this.pid = program;
   }
 
   public void setName(String name) {

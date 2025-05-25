@@ -9,5 +9,5 @@ import com.ios.backend.entities.Task;
 
 @Repository
 public interface TaskRespository extends JpaRepository<Task, Long> {
-  List<Task> findByProgram(long program);
+  List<Task> findByPid(long program);
 }
